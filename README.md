@@ -22,6 +22,12 @@ This can be installed two ways:
 1. We include a `composer.json` file, which can get picked up by something like [Composer Manager](https://www.drupal.org/project/composer_manager), to install the dependency automatically.
 2. If the class is not already available, and if the `libraries` module is available, we will use it to look up `jsonstreamingparser`, from which we will attempt to load the handful of files we require. As such, cloning the [repository](https://github.com/salsify/jsonstreamingparser) to `sites/all/libraries` such that `sites/all/libraries/jsonstreamingparser/src/Parser.php` exists should suffice.
 
+## Configuration
+
+Some configuration is available at `admin/islandora/tools/dgi_solr_views_field_filter`. He, we allow the configuration of:
+
+1. The regex to use to filter out fields. The only filters out the compound sequencing relationships.
+2. A time limit to (attempt) to set, to allow additional time for parsing.
 
 ## Troubleshooting/Issues
 
