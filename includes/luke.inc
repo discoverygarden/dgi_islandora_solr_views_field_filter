@@ -24,8 +24,10 @@ function dgi_islandora_solr_views_field_filter_add_fields(&$fields) {
         require_once "$library_path/src/$file";
       }
     }
-    watchdog('dgi_islandora_solr_views_field_filter', 'The JSON Streaming Parser does not appear to be installed.');
-    return;
+    if (!class_exists("\JsonStreamingParser\Parser")) {
+      watchdog('dgi_islandora_solr_views_field_filter', 'The JSON Streaming Parser does not appear to be installed.');
+      return;
+    }
   }
   $url = dgi_islandora_solr_views_field_filter_get_luke_url();
   if (!$url) {
