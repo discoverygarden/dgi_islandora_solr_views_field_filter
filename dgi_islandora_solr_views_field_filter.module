@@ -1,0 +1,39 @@
+<?php
+/**
+ * @file
+ * General hook implementations.
+ */
+const DGI_ISLANDORA_SOLR_VIEWS_FIELD_FILTER_REGEX_EXCLUDE_DEFAULT = '!RELS_EXT_(?:http://islandora.ca/ontology/relsext#)?isSequenceNumberOf.+_literal.+!';
+
+/**
+ * Implements hook_menu().
+ */
+function dgi_islandora_solr_views_field_filter_menu() {
+  $item = array();
+
+  $item['admin/islandora/tools/dgi_solr_views_field_filter'] = array(
+    'title' => 'Solr Views Field Filter',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dgi_islandora_solr_views_field_filter_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/admin.form.inc',
+  );
+
+  return $item;
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function dgi_islandora_solr_views_field_filter_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'views_data') {
+    unset($implementations['islandora_solr_views']);
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function dgi_islandora_solr_views_field_filter_views_api() {
+  return array('api' => '3.0');
+}
