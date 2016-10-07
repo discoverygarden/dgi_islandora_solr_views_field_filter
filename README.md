@@ -24,7 +24,7 @@ This can be installed two ways:
 
 ## Configuration
 
-Some configuration is available at `admin/islandora/tools/dgi_solr_views_field_filter`. He, we allow the configuration of:
+Some configuration is available at `admin/islandora/tools/dgi_solr_views_field_filter`. Here, we allow the configuration of:
 
 1. The regex to use to filter out fields. The only filters out the compound sequencing relationships.
 2. A time limit to (attempt) to set, to allow additional time for parsing.
