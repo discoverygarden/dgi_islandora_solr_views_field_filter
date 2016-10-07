@@ -1,6 +1,6 @@
 name = DGI Islandora Solr Views Field Filter
 description = "Filter fields made available to Solr Views."
-package = Islandora
+package = Islandora Search
 dependencies[] = islandora_solr_views
 version = 7.x-dev
 core = 7.x
