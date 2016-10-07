@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Various (un)installation hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function dgi_islandora_solr_views_field_filter_uninstall() {
+  $vars = array(
+    'dgi_islandora_solr_views_field_filter_regex_exclude',
+  );
+  array_map('variable_del', $vars);
+}
