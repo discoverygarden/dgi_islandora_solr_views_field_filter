@@ -10,7 +10,6 @@
 function dgi_islandora_solr_views_field_filter_uninstall() {
   $vars = array(
     'dgi_islandora_solr_views_field_filter_regex_exclude',
-    'dgi_islandora_solr_views_field_filter_time_limit',
   );
   array_map('variable_del', $vars);
 }

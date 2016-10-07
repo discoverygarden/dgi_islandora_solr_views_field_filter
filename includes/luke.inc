@@ -34,11 +34,6 @@ function dgi_islandora_solr_views_field_filter_add_fields(&$fields) {
     return;
   }
 
-  $time_limit = variable_get('dgi_islandora_solr_views_field_filter_time_limit');
-  if ($time_limit) {
-    set_time_limit($time_limit);
-  }
-
   $stream = fopen($url, 'r');
   $listener = new DgiIslandoraSolrViewsFieldFilterListener($fields);
   try {
