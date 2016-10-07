@@ -9,12 +9,19 @@ Too many fields being made available to Solr Views causes memory issues, so we a
 This module requires the following modules/libraries:
 
 * [Islandora Solr Views](https://github.com/islandora/islandora_solr_views)
-* [Composer Manager](https://www.drupal.org/project/composer_manager)
-* [salsify/json-streaming-parser](https://github.com/salsify/jsonstreamingparser) (likely to be installed via the "Composer Manager")
+* [salsify/json-streaming-parser](https://github.com/salsify/jsonstreamingparser) (see [below](#json-streaming-parser))
 
 ## Installation
 
-For basic install as usual, see [this](https://drupal.org/documentation/install/modules-themes/modules-7) for further information.
+For base, install as usual, see [this](https://drupal.org/documentation/install/modules-themes/modules-7) for further information.
+
+### json-streaming-parser
+
+This can be installed two ways:
+
+1. We include a `composer.json` file, which can get picked up by something like [Composer Manager](https://www.drupal.org/project/composer_manager), to install the dependency automatically.
+2. If the class is no already available, and if the `libraries` module is available, we will use it to look up `jsonstreamingparser`, from which we will attempt to load the handful of files we require. As such, cloning the [repository](https://github.com/salsify/jsonstreamingparser) to `sites/all/libraries` such that `sites/all/libraries/jsonstreamingparser/src/Parser.php` exists should suffice.
+
 
 ## Troubleshooting/Issues
 
