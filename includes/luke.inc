@@ -11,13 +11,22 @@
  *   Reference to the array in which to add views field definitions.
  */
 function dgi_islandora_solr_views_field_filter_add_fields(&$fields) {
+  if (!class_exists("\JsonStreamingParser\Parser")) {
+    watchdog('dgi_islandora_solr_views_field_filter', 'The JSON Streaming Parser does not appear to be installed.');
+    return;
+  }
   $url = dgi_islandora_solr_views_field_filter_get_luke_url();
   if (!$url) {
     return;
   }
 
+  $time_limit = variable_get('dgi_islandora_solr_views_field_filter_time_limit');
+  if ($time_limit) {
+    set_time_limit($time_limit);
+  }
+
   $stream = fopen($url, 'r');
-  $listener = new \DgiIslandoraSolrViewsFieldFilter\Listener($fields);
+  $listener = new DgiIslandoraSolrViewsFieldFilterListener($fields);
   try {
     $parser = new \JsonStreamingParser\Parser($stream, $listener);
     $parser->parse();

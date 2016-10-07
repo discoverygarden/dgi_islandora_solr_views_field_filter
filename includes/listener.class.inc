@@ -3,9 +3,8 @@
  * @file
  * Incremental JSON parser listener implementation.
  */
-namespace DgiIslandoraSolrViewsFieldFilter;
 
-class Listener implements \JsonStreamingParser\Listener\IdleListener {
+class DgiIslandoraSolrViewsFieldFilterListener extends \JsonStreamingParser\Listener\IdleListener {
   const FIELDS_DEPTH = 1;
 
   protected $startedDoc = FALSE;
@@ -17,7 +16,7 @@ class Listener implements \JsonStreamingParser\Listener\IdleListener {
   protected $fieldName;
   protected $fieldInfo;
   protected $fieldItem;
-  
+
   public function __construct(&$fields) {
     $this->fields =& $fields;
   }
@@ -38,10 +37,10 @@ class Listener implements \JsonStreamingParser\Listener\IdleListener {
   }
 
   public function endObject() {
-    if ($this->depth === static::FIELDS_DEPTH && $this->inFields) {
+    if ($this->depth === static::FIELDS_DEPTH + 1 && $this->inFields) {
       $this->inFields = FALSE;
     }
-    elseif ($this->depth === static::FIELDS_DEPTH + 1) {
+    elseif ($this->depth === static::FIELDS_DEPTH + 2 && $this->inFields) {
       $this->addFieldToFields($this->fieldName, $this->fieldInfo);
     }
     $this->depth--;
@@ -54,7 +53,7 @@ class Listener implements \JsonStreamingParser\Listener\IdleListener {
     }
     elseif ($this->inFields) {
       // Processing something in the "fields" object.
-      if ($this->depth == static::FIELDS_DEPTH + 1) {
+      if ($this->depth == static::FIELDS_DEPTH + 1 && $this->checkFieldname($key)) {
         // Keys directly inside represent field names.
         $this->fieldName = $key;
       }
@@ -74,8 +73,16 @@ class Listener implements \JsonStreamingParser\Listener\IdleListener {
   }
 
   protected function checkFieldname($fieldname) {
+    static $regex = NULL;
+    if ($regex === NULL) {
+      $regex = variable_get('dgi_islandora_solr_views_field_filter_regex_exclude', DGI_ISLANDORA_SOLR_VIEWS_FIELD_FILTER_REGEX_EXCLUDE_DEFAULT);
+    }
+    
     // We do not allow to display 'sort_*' fields.
-    if (strpos($solr_field_name, 'sort_') === 0) {
+    if (strpos($fieldname, 'sort_') === 0) {
+      return FALSE;
+    }
+    elseif ($regex && preg_match($regex, $fieldname)) {
       return FALSE;
     }
 
@@ -120,7 +127,7 @@ class Listener implements \JsonStreamingParser\Listener\IdleListener {
       );
     }
     // Add array.
-    $this->fields = $field;
+    $this->fields[$solr_field_name] = $field;
   }
 }
 

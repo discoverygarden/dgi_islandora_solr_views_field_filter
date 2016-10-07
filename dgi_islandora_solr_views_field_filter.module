@@ -3,6 +3,7 @@
  * @file
  * General hook implementations.
  */
+const DGI_ISLANDORA_SOLR_VIEWS_FIELD_FILTER_REGEX_EXCLUDE_DEFAULT = '!RELS_EXT_(?:http://islandora.ca/ontology/relsext#)?isSequenceNumberOf.+_literal.+!';
 
 /**
  * Implements hook_menu().
@@ -14,7 +15,7 @@ function dgi_islandora_solr_views_field_filter_menu() {
     'title' => 'Solr Views Field Filter',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('dgi_islandora_solr_views_field_filter_admin_form'),
-    'access arguments' => 'administer site configuration',
+    'access arguments' => array('administer site configuration'),
     'file' => 'includes/admin.form.inc',
   );
 

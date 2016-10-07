@@ -5,3 +5,4 @@ dependencies[] = islandora_solr_views
 version = 7.x-dev
 core = 7.x
 configure = admin/islandora/tools/dgi_solr_views_field_filter
+files[] = includes/listener.class.inc
