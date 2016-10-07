@@ -20,7 +20,7 @@ For base, install as usual, see [this](https://drupal.org/documentation/install/
 This can be installed two ways:
 
 1. We include a `composer.json` file, which can get picked up by something like [Composer Manager](https://www.drupal.org/project/composer_manager), to install the dependency automatically.
-2. If the class is no already available, and if the `libraries` module is available, we will use it to look up `jsonstreamingparser`, from which we will attempt to load the handful of files we require. As such, cloning the [repository](https://github.com/salsify/jsonstreamingparser) to `sites/all/libraries` such that `sites/all/libraries/jsonstreamingparser/src/Parser.php` exists should suffice.
+2. If the class is not already available, and if the `libraries` module is available, we will use it to look up `jsonstreamingparser`, from which we will attempt to load the handful of files we require. As such, cloning the [repository](https://github.com/salsify/jsonstreamingparser) to `sites/all/libraries` such that `sites/all/libraries/jsonstreamingparser/src/Parser.php` exists should suffice.
 
 
 ## Troubleshooting/Issues
