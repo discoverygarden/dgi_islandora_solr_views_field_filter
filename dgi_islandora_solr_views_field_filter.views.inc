@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Views hook implementations.
+ */
 
 /**
  * Implements hook_views_data().
@@ -62,7 +66,7 @@ function dgi_islandora_solr_views_field_filter_views_data() {
   );
 
   module_load_include('inc', 'dgi_islandora_solr_views_field_filter', 'includes/luke');
-  dgi_islandora_solr_views_field_filter_add_fields($data[$base_table]); 
+  dgi_islandora_solr_views_field_filter_add_fields($data[$base_table]);
 
   // Add our collection counting goodness.
   $data[$base_table]['solr_collection_count'] = array(

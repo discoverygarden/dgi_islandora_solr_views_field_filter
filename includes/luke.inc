@@ -12,6 +12,18 @@
  */
 function dgi_islandora_solr_views_field_filter_add_fields(&$fields) {
   if (!class_exists("\JsonStreamingParser\Parser")) {
+    $library_path = module_exists('libraries') ? libraries_get_path('jsonstreamingparser') : FALSE;
+    if ($library_path) {
+      $files = array(
+        'Listener.php',
+        'Parser.php',
+        'ParsingError.php',
+        'Listener/IdleListener.php',
+      );
+      foreach ($files as $file) {
+        require_once "$library_path/src/$file";
+      }
+    }
     watchdog('dgi_islandora_solr_views_field_filter', 'The JSON Streaming Parser does not appear to be installed.');
     return;
   }

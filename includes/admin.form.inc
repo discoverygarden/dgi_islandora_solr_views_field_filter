@@ -4,6 +4,9 @@
  * Admin form.
  */
 
+/**
+ * Form building; build the admin form.
+ */
 function dgi_islandora_solr_views_field_filter_admin_form($form, &$form_state) {
   $form['dgi_islandora_solr_views_field_filter_regex_exclude'] = array(
     '#type' => 'textfield',
@@ -24,6 +27,9 @@ function dgi_islandora_solr_views_field_filter_admin_form($form, &$form_state) {
   return system_settings_form($form);
 }
 
+/**
+ * Element validation; ensure the entered pattern appears to be valid.
+ */
 function dgi_islandora_solr_views_field_filter_regex_element_validate($element, $form_state) {
   if ($element['#value'] && preg_match($element['#value'], 'test subject') === FALSE) {
     form_error($element, t('The regular expression in %field does not appear to be valid.', array(
