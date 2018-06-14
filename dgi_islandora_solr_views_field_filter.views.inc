@@ -107,7 +107,7 @@ function dgi_islandora_solr_views_field_filter_views_data() {
  */
 function _dgi_islandora_solr_views_field_filter_get_filename() {
   $directory = 'temporary://dgi_islandora_solr_views_field_filter';
-  if (!file_prepare_directory($directory, FILE_MODIFY_PERMISSIONS, FILE_CREATE_DIRECTORY)) {
+  if (!file_prepare_directory($directory, FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY)) {
     throw new Exception(t('Unable to create our temporary directory: @dir', array(
       '@dir' => $directory,
     )));
