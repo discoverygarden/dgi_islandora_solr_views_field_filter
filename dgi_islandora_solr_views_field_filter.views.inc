@@ -135,6 +135,9 @@ function _dgi_islandora_solr_views_field_filter_get_file() {
 
   $results = $q->execute();
 
+  if (!isset($results['file'])) {
+    return FALSE;
+  }
   $result = reset($results['file']);
 
   return $result ?
