@@ -33,8 +33,14 @@ function dgi_islandora_solr_views_field_filter_add_fields(&$fields) {
   if (!$url) {
     return;
   }
-
-  $stream = fopen($url, 'r');
+  $timeout = variable_get('dgi_islandora_solr_views_field_filter_fopen_timeout', 120);
+  $opts = array(
+    'http' => array(
+      'timeout' => $timeout,
+    ),
+  );
+  $context = stream_context_create($opts);
+  $stream = fopen($url, 'r', FALSE, $context);
   $listener = new DgiIslandoraSolrViewsFieldFilterListener($fields);
   try {
     $parser = new \JsonStreamingParser\Parser($stream, $listener);
