@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Incremental JSON parser listener implementation.
