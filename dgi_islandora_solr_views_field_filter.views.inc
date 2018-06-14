@@ -83,6 +83,13 @@ function _dgi_islandora_solr_views_field_filter_views_data() {
  * Implements hook_views_data().
  */
 function dgi_islandora_solr_views_field_filter_views_data() {
+  if (drupal_is_cli()) {
+    // XXX: If we are running on the CLI (potentially as a user different to
+    // that of the HTTP/web server), avoid the potential mangling of permissions
+    //  on the file.
+    return _dgi_islandora_solr_views_field_filter_views_data();
+  }
+
   $file = _dgi_islandora_solr_views_field_filter_get_data_file();
 
   try {
@@ -108,13 +115,7 @@ function dgi_islandora_solr_views_field_filter_views_data() {
  *   The URI of the cache file.
  */
 function _dgi_islandora_solr_views_field_filter_get_filename() {
-  $directory = 'temporary://dgi_islandora_solr_views_field_filter';
-  if (!file_prepare_directory($directory, FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY)) {
-    throw new Exception(t('Unable to create our temporary directory: @dir', array(
-      '@dir' => $directory,
-    )));
-  }
-  return "$directory/fields.json";
+  return 'temporary://dgi_islandora_solr_views_field_filter_fields.json';
 }
 
 /**
