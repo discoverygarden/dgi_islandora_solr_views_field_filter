@@ -131,11 +131,11 @@ function _dgi_islandora_solr_views_field_filter_get_filename() {
 function _dgi_islandora_solr_views_field_filter_get_file() {
   $q = (new EntityFieldQuery())
     ->entityCondition('entity_type', 'file')
-    ->propertyCondition('filename', _dgi_islandora_solr_views_field_filter_get_filename());
+    ->propertyCondition('uri', _dgi_islandora_solr_views_field_filter_get_filename());
 
   $results = $q->execute();
 
-  $result = reset($results);
+  $result = reset($results['file']);
 
   return $result ?
     file_load($result->fid) :
