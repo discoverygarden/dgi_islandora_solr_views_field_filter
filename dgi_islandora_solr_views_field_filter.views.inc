@@ -139,6 +139,11 @@ function _dgi_islandora_solr_views_field_filter_get_file() {
 /**
  * Manage the building of the file.
  *
+ * Locking protocol very much adapted from that in Islandora's
+ * islandora_view_datastream_retrieve_file_uri().
+ *
+ * @see islandora_view_datastream_retrieve_file_uri()
+ *
  * @return string
  *   The URI of the managed file.
  *
