@@ -38,3 +38,18 @@ function dgi_islandora_solr_views_field_filter_module_implements_alter(&$impleme
 function dgi_islandora_solr_views_field_filter_views_api() {
   return array('api' => '3.0');
 }
+
+/**
+ * Implements hook_flush_caches().
+ */
+function dgi_islandora_solr_views_field_filter_flush_caches() {
+  // XXX: Not quite documented use of this hook; however, allowances for this
+  // type of usage has been allowed for in core modules, in particular, the
+  // invocation of this hook is minimized in system_cron().
+  // ... so... let's follow suit, and nuke our cache.
+  module_load_include('views.inc', 'dgi_islandora_solr_views_field_filter');
+  $file = _dgi_islandora_solr_views_field_filter_get_file();
+  if ($file) {
+    file_delete($file);
+  }
+}

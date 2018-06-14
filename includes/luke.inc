@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Helper for talking to Luke.
