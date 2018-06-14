@@ -109,16 +109,6 @@ function dgi_islandora_solr_views_field_filter_views_data() {
 }
 
 /**
- * Helper; build out the file URI.
- *
- * @return string
- *   The URI of the cache file.
- */
-function _dgi_islandora_solr_views_field_filter_get_filename() {
-  return 'temporary://dgi_islandora_solr_views_field_filter_fields.json';
-}
-
-/**
  * Helper; identify the file object in the DB for the file URI.
  *
  * @return object|bool
@@ -128,7 +118,7 @@ function _dgi_islandora_solr_views_field_filter_get_filename() {
 function _dgi_islandora_solr_views_field_filter_get_file() {
   $q = (new EntityFieldQuery())
     ->entityCondition('entity_type', 'file')
-    ->propertyCondition('filename', _dgi_islandora_solr_views_field_filter_get_filename());
+    ->propertyCondition('filename', DGI_ISLANDORA_SOLR_VIEWS_FIELD_FILTER_CACHE_FILENAME);
 
   $results = $q->execute();
 
@@ -154,7 +144,7 @@ function _dgi_islandora_solr_views_field_filter_get_file() {
  *   If we fail to acquire locks, Exception can be thrown.
  */
 function _dgi_islandora_solr_views_field_filter_get_data_file() {
-  $file_uri = _dgi_islandora_solr_views_field_filter_get_filename();
+  $file_uri = DGI_ISLANDORA_SOLR_VIEWS_FIELD_FILTER_CACHE_FILENAME;
 
   touch(drupal_realpath($file_uri));
   $fp = fopen($file_uri, 'r+b');

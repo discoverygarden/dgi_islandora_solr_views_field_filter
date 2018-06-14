@@ -4,6 +4,7 @@
  * General hook implementations.
  */
 
+const DGI_ISLANDORA_SOLR_VIEWS_FIELD_FILTER_CACHE_FILENAME = 'temporary://dgi_islandora_solr_views_field_filter_fields.json'
 const DGI_ISLANDORA_SOLR_VIEWS_FIELD_FILTER_REGEX_EXCLUDE_DEFAULT = '!RELS_EXT_(?:http://islandora\.ca/ontology/relsext#)?isSequenceNumberOf.+_literal.+!';
 
 /**
