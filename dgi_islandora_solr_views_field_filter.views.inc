@@ -86,6 +86,8 @@ function dgi_islandora_solr_views_field_filter_views_data() {
   $file = _dgi_islandora_solr_views_field_filter_get_data_file();
 
   try {
+    module_load_include('inc', 'dgi_islandora_solr_views_field_filter', 'includes/utilities');
+    _dgi_islandora_solr_views_field_filter_load_parser();
     $listener = new \JsonStreamingParser\Listener\InMemoryListener();
     $stream = fopen($file, 'rb');
     $parser = new \JsonStreamingParser\Parser($stream, $listener);
@@ -170,6 +172,7 @@ function _dgi_islandora_solr_views_field_filter_get_data_file() {
         }
         if (flock($fp, LOCK_EX)) {
           // Get exclusive lock, write file.
+          module_load_include('inc', 'islandora', 'includes/utilities');
           $file = islandora_temp_file_entry($file_uri, 'application/json');
           if ($file->filesize > 0) {
             // Populated in another thread while we were waiting for the
