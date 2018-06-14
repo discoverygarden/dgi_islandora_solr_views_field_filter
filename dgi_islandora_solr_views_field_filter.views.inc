@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Views hook implementations.
@@ -86,7 +87,7 @@ function dgi_islandora_solr_views_field_filter_views_data() {
   if (drupal_is_cli()) {
     // XXX: If we are running on the CLI (potentially as a user different to
     // that of the HTTP/web server), avoid the potential mangling of permissions
-    //  on the file.
+    // on the file.
     return _dgi_islandora_solr_views_field_filter_views_data();
   }
 
