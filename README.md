@@ -9,13 +9,15 @@ Too many fields being made available to Solr Views causes memory issues, so we a
 This module requires the following modules/libraries:
 
 * [Islandora Solr Views](https://github.com/islandora/islandora_solr_views)
-* [salsify/json-streaming-parser](https://github.com/salsify/jsonstreamingparser) (see [below](#json-streaming-parser))
+* [salsify/json-streaming-parser v7.0](https://github.com/salsify/jsonstreamingparser/releases/tag/v7.0) (see [below](#json-streaming-parser))
 
 ## Installation
 
 For base, install as usual, see [this](https://drupal.org/documentation/install/modules-themes/modules-7) for further information.
 
 ### json-streaming-parser
+
+Does not work with releases greater than 7.0.
 
 This can be installed two ways:
 
