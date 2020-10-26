@@ -66,9 +66,13 @@ function _dgi_islandora_solr_views_field_filter_views_data() {
     ),
   );
 
+  $total_fields = count($data[$base_table]);
   module_load_include('inc', 'dgi_islandora_solr_views_field_filter', 'includes/luke');
   dgi_islandora_solr_views_field_filter_add_fields($data[$base_table]);
 
+  if (count($data[$base_table]) <= $total_fields) {
+    watchdog('dgi_islandora_solr_views_field_filter', 'No Solr fields were added to views data', NULL, WATCHDOG_WARNING);
+  }
   // Add our collection counting goodness.
   $data[$base_table]['solr_collection_count'] = array(
     'title' => 'Collection count',
