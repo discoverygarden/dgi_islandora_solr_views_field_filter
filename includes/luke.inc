@@ -33,12 +33,12 @@ function dgi_islandora_solr_views_field_filter_add_fields(&$fields) {
     $parser = new \JsonStreamingParser\Parser($stream, $listener);
     $parser->parse();
   }
-  finally {
-  set_time_limit(ini_get('max_execution_time'));
-  }
   catch (Exception $e) {
     fclose($stream);
     watchdog_exception('dgi_islandora_solr_views_field_filter', $e);
+  }
+  finally {
+    set_time_limit(ini_get('max_execution_time'));
   }
 }
 
