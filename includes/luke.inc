@@ -29,12 +29,16 @@ function dgi_islandora_solr_views_field_filter_add_fields(&$fields) {
   $stream = fopen($url, 'r', FALSE, $context);
   $listener = new DgiIslandoraSolrViewsFieldFilterListener($fields);
   try {
+    set_time_limit(0);
     $parser = new \JsonStreamingParser\Parser($stream, $listener);
     $parser->parse();
   }
   catch (Exception $e) {
     fclose($stream);
     watchdog_exception('dgi_islandora_solr_views_field_filter', $e);
+  }
+  finally {
+    set_time_limit(ini_get('max_execution_time'));
   }
 }
 
@@ -66,5 +70,6 @@ function dgi_islandora_solr_views_field_filter_get_luke_url() {
     // Generate nice URL.
     return url($luke_url, array('absolute' => TRUE, 'query' => $luke_query));
   }
+  watchdog('dgi_islandora_solr_views_field_filter', 'Solr Luke handler unavailable', NULL, WATCHDOG_CRITICAL);
   return FALSE;
 }
